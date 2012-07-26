@@ -9,6 +9,10 @@ group :development do
   gem 'sqlite3', '1.3.5'
 end
 
+group :test do
+  gem 'rspec-rails'
+end
+
 gem 'json'
 
 # Gems used only for assets and not required
