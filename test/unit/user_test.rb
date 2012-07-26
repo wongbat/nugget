@@ -1,20 +1,14 @@
-require 'test_helper'
+require 'test/test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  test "name cannot be blank" do
-    assert true
-  end
 
   test "should not save blank name" do
     user = User.new
-    assert !user.save, "saved while name field was blank"
+    assert !user.save
   end
 
-  test "should report error" do
-    undefined_variable
-    assert true
+  test "can save if name present" do
+    user = User.new(:name => "test")
+    assert user.save
   end
-  # test "the truth" do
-  #   assert true
-  # end
 end
