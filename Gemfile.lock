@@ -37,6 +37,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
+    columnize (0.3.6)
     diff-lcs (1.1.3)
     erubis (2.7.0)
     execjs (1.4.0)
@@ -48,6 +49,8 @@ GEM
       railties (>= 3.2.0.beta, < 5.0)
       thor (~> 0.14)
     json (1.7.3)
+    linecache (0.46)
+      rbx-require-relative (> 0.0.4)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -79,6 +82,7 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (0.9.2.2)
+    rbx-require-relative (0.0.9)
     rdoc (3.12)
       json (~> 1.4)
     rspec (2.10.0)
@@ -94,6 +98,11 @@ GEM
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec (~> 2.10.0)
+    ruby-debug (0.10.4)
+      columnize (>= 0.1)
+      ruby-debug-base (~> 0.10.4.0)
+    ruby-debug-base (0.10.4)
+      linecache (>= 0.3)
     sass (3.1.19)
     sass-rails (3.2.4)
       railties (~> 3.2.0)
@@ -124,6 +133,7 @@ DEPENDENCIES
   pg (= 0.12.2)
   rails (= 3.2.6)
   rspec-rails
+  ruby-debug
   sass-rails (= 3.2.4)
   sqlite3 (= 1.3.5)
   uglifier (= 1.2.3)
