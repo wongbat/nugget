@@ -138,6 +138,12 @@ GEM
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
+    shoulda (3.1.1)
+      shoulda-context (~> 1.0)
+      shoulda-matchers (~> 1.2)
+    shoulda-context (1.0.0)
+    shoulda-matchers (1.2.0)
+      activesupport (>= 3.0.0)
     sprockets (2.1.3)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -170,5 +176,6 @@ DEPENDENCIES
   ruby-debug-base19 (= 0.11.24)
   ruby-debug19 (= 0.11.6)
   sass-rails (= 3.2.4)
+  shoulda
   sqlite3 (= 1.3.5)
   uglifier (= 1.2.3)
