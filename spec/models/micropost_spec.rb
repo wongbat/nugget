@@ -19,11 +19,10 @@ describe Micropost do
       micropost = Micropost.new(:content => content)
       micropost.save.should == false
     end
-    
+
     it "should save where content < 140 characters" do
-      content = "ABC"
-      micropost = Micropost.new(:content => content)
-      micropost.save
+      micropost = FactoryGirl.build(:micropost)
+      micropost.save.should == true
     end
   end
 end
