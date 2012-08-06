@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @micropost %> |
-<%= link_to 'Back', microposts_path %>
+<%= link_to 'Show', user_micropost_url %> |
+<%= link_to 'Back', user_micropost_path(@user, @micropost) %>
