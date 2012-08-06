@@ -14,7 +14,7 @@
     <td><%= micropost.content %></td>
     <td><%= micropost.user_id %></td>
     <td><%= link_to 'Show' , [@user, micropost] %></td>
-    <td><%= link_to 'Edit', edit_user_micropost_path(@user, @micropost) %></td>
+    <td><%= link_to 'Edit', edit_user_micropost_path(@user, micropost) %></td>
     <td><%= link_to 'Destroy', [@user, micropost], :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
   </tr>
 <% end %>

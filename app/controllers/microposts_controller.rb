@@ -27,7 +27,7 @@ class MicropostsController < ApplicationController
   # GET /microposts/new.json
   def new
     @user = User.find(params[:user_id])
-    @micropost= Micropost.new
+    @micropost= @user.microposts.new
 
     respond_to do |format|
       format.html # new.html.erb
