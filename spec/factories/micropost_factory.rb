@@ -7,6 +7,6 @@ FactoryGirl.define do
   end
 
   factory :invalid_micropost, parent: :micropost do |f|
-    f.content "ABC"
+    f.content "ABC"*140
   end
 end
