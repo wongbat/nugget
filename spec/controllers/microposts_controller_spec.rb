@@ -26,49 +26,48 @@ describe MicropostsController do
 
   describe "GET new" do
     before (:each) do
-      @micropost = FactoryGirl.create(:micropost)
+      @user = FactoryGirl.create(:user)
     end
 
     it "renders the new view" do
-      get :new, :user_id => @micropost.user.id
+      get :new, :user_id => @user.id
       response.should render_template("new")
     end
   end
 
   describe "POST create" do
-    before(:each) do
-      @user = Factory(:user)
-      @micropost_attributes = FactoryGirl.attributes_for(:micropost)
+    before (:each) do
+      @user = FactoryGirl.create(:user)
+      @mp_attributes = FactoryGirl.attributes_for(:micropost)
+      @invalid_mp_attributes = FactoryGirl.attributes_for(:invalid_micropost)
     end
 
     context "with valid attributes" do
       it "creates a new micropost" do
         expect{
-          post :create, :user_id => @user.id, :micropost => @micropost_attributes
+          post :create, :user_id => @user.id, :micropost => @mp_attributes
         }.to change(Micropost,:count).by(1)
+        Micropost.last.user.id.should == @user.id
       end
 
-      it "redirects to the new micropost" do
-        micropost = FactoryGirl.attributes_for(:micropost)
-        post :create, :user_id => @user.id.to_s, :micropost => @micropost_attributes
-        assigns(:micropost).content.should eq(micropost[:content])
-        response.should redirect_to(user_microposts_path)
+      it "redirects to the index" do
+        post :create, :user_id => @user.id.to_s, :micropost => @mp_attributes
+        assigns(:micropost).content.should eq(@mp_attributes[:content])
+        Micropost.last.user.id.should == @user.id
+        response.should redirect_to(user_microposts_path(@user))
       end
     end
 
-    context "with invalid attributes" do
-      before (:each) do
-        @user = FactoryGirl.create(:user)
-      end
-
+    context "with invalid content" do
       it "will not create new micropost" do
         expect{ 
-          post :create, :user_id => @user.id, micropost: FactoryGirl.attributes_for(:invalid_micropost)
+          post :create, :user_id => @user.id, :micropost => @invalid_mp_attributes
         }.to_not change(Micropost,:count)
+        Micropost.last.should == nil
       end
 
-      it "renders the show method" do
-        post :create, :user_id => @user.id, micropost: FactoryGirl.attributes_for(:invalid_micropost)
+      it "renders the new method" do
+        post :create, :user_id => @user.id, :micropost => @invalid_mp_attributes
         response.should render_template("new")
       end
     end
@@ -86,9 +85,8 @@ describe MicropostsController do
       end
 
       it "stores the updated @micropost attributes" do
-         @micropost.reload
-         @micropost.content.should eq("new stuff")
-       end
+         @micropost.reload.content.should eq("new stuff")
+      end
 
       it "redirects to the updated micropost" do
         response.should redirect_to user_micropost_path
@@ -123,12 +121,12 @@ describe MicropostsController do
 
     it "deletes the user" do
       expect{
-        delete :destroy, :user_id => @micropost.user.id, id: @micropost
+        delete :destroy, :user_id => @micropost.user.id, :id => @micropost
       }.to change(Micropost,:count).by(-1)
     end
 
     it "redirects to index" do
-      delete :destroy, :user_id => @micropost.user.id, id: @micropost
+      delete :destroy, :user_id => @micropost.user.id, :id => @micropost
       response.should redirect_to("/users/#{@micropost.user.id}/microposts")
     end
   end
