@@ -45,7 +45,7 @@ class MicropostsController < ApplicationController
   # POST /microposts.json
   def create
     @user = User.find(params[:user_id])
-    @micropost = @user.microposts.build(params[:micropost])
+    @micropost = @user.microposts.new(params[:micropost])
 
     respond_to do |format|
       if @micropost.save
@@ -83,7 +83,7 @@ class MicropostsController < ApplicationController
     @micropost.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_microposts_path }
+      format.html { redirect_to user_microposts_path(@user) }
       format.json { head :no_content }
     end
   end
