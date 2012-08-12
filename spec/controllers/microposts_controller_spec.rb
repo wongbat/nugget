@@ -96,7 +96,7 @@ describe MicropostsController do
     context "invalid attributes" do
       before (:each) do
         @micropost = FactoryGirl.create(:micropost)
-        put :update, :user_id => @micropost.user.id, id: @micropost, micropost: FactoryGirl.attributes_for(:micropost, :content => "hi"*150)
+        put :update, :user_id => @micropost.user.id, :id => @micropost, :micropost => FactoryGirl.attributes_for(:invalid_micropost)
       end
 
       it "locates the requested @micropost" do
@@ -104,8 +104,7 @@ describe MicropostsController do
       end
 
       it "does not change attributes for @micropost" do
-        @micropost.reload
-        @micropost.content.should eq("hello")
+        @micropost.reload.content.should eq("hello")
       end
 
       it "renders the edit template" do
@@ -123,6 +122,7 @@ describe MicropostsController do
       expect{
         delete :destroy, :user_id => @micropost.user.id, :id => @micropost
       }.to change(Micropost,:count).by(-1)
+      Micropost.last.should == nil
     end
 
     it "redirects to index" do
